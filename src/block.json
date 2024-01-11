@@ -6,7 +6,7 @@
 	"title": "Youtube LazyLoad",
 	"category": "widgets",
 	"icon": "video-alt3",
-	"description": "Block that load YouTube scripts only if user clicks on the play button",
+	"description": "Block that load YouTube video scripts only if user clicks on the play button",
 	"example": {},
 	"supports": {
 		"html": false,

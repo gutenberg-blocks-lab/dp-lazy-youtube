@@ -2,10 +2,13 @@
     display: flex;
 	box-sizing: border-box;
 
-	&:empty{
+	.empty-block-message{
 		border: 3px solid#3858e9;	
+		color:#3858e9;	
 		background-color: rgba(56, 88, 233, 0.05);	
 		padding: 4rem 20px;
+		flex-grow: 1;
+		text-align: center;
 	}
 	
 	.youtube-preview {

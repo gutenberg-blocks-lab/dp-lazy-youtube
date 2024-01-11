@@ -12,8 +12,6 @@ const Edit = ({ attributes, setAttributes }) => {
     const { url } = attributes;
     let { containerId } = attributes;
     const [youtubeId, setYoutubeId] = useState("");
-
-    // Set isEditing to true if url is empty
     const [isEditing, setIsEditing] = useState(!url);
 
     useEffect(() => {
@@ -61,16 +59,16 @@ const Edit = ({ attributes, setAttributes }) => {
                         onChange={handleUrlChange}
                         placeholder="Enter YouTube URL"
                     />
+                ) : youtubeId ? (
+                    <div className="youtube-preview">
+                        <PlayIcon />
+                        <img
+                            src={placeholderImageUrl}
+                            alt="YouTube Video Placeholder"
+                        />
+                    </div>
                 ) : (
-                    youtubeId && (
-                        <div className="youtube-preview">
-                            <PlayIcon />
-                            <img
-                                src={placeholderImageUrl}
-                                alt="YouTube Video Placeholder"
-                            />
-                        </div>
-                    )
+                    <div className="empty-block-message">Edit video block</div>
                 )}
             </div>
         </>
