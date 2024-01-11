@@ -5,7 +5,6 @@ import {
     ToolbarButton,
 } from "@wordpress/components";
 import { BlockControls, useBlockProps } from "@wordpress/block-editor";
-import "./editor.scss";
 
 const Edit = ({ attributes, setAttributes }) => {
     const { url } = attributes;
