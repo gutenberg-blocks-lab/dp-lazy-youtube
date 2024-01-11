@@ -15,6 +15,9 @@
 		"url": {
 			"type": "string",
 			"__experimentalRole": "content"
+		},
+		"containerId": {
+			"type": "string"
 		}
 	},
 	"textdomain": "dp-init",

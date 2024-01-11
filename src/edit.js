@@ -1,12 +1,22 @@
 // Edit.js
 
-import { useState } from "@wordpress/element";
+import { useState, useEffect } from "@wordpress/element";
 import { TextControl } from "@wordpress/components";
 import { useBlockProps } from "@wordpress/block-editor";
 
-export default function Edit({ attributes, setAttributes }) {
-    const { url } = attributes;
+const Edit = ({ attributes, setAttributes }) => {
+    const { url, containerId } = attributes;
     const [youtubeId, setYoutubeId] = useState("");
+
+    useEffect(() => {
+        if (!containerId) {
+            const uniqueId = `youtube-container-${Math.floor(
+                100000 + Math.random() * 900000
+            )}`;
+            setAttributes({ containerId: uniqueId });
+        }
+    }, [containerId, setAttributes]);
+
 
     const extractYoutubeId = (url) => {
         const regex =
@@ -42,4 +52,6 @@ export default function Edit({ attributes, setAttributes }) {
             )}
         </div>
     );
-}
+};
+
+export default Edit;

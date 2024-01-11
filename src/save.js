@@ -1,8 +1,8 @@
 const Save = ({ attributes }) => {
-    const { url } = attributes;
+    const { url, containerId } = attributes;
 
     const extractYoutubeId = (url) => {
-        if (!url) return ""; // Check if url is defined
+        if (!url) return "";
         const regex =
             /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^\"&?\/ ]{11})/;
         const matches = url.match(regex);
@@ -13,20 +13,15 @@ const Save = ({ attributes }) => {
     const placeholderImageUrl = youtubeId
         ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`
         : "";
-    const random_number = Math.floor(100000 + Math.random() * 900000);
 
     return (
         <div
-            id={`youtube-player-container-${random_number}`}
+            id={containerId} // This should reflect the containerId attribute
             className="lazy-youtube-player-container"
         >
             {youtubeId && (
                 <>
-                    <button
-                        className="play-button"
-                        id={`play-button-${random_number}`}
-                        data-youtube-id={youtubeId}
-                    >
+                    <button className="play-button" data-youtube-id={youtubeId}>
                         {/* Put your play button SVG or icon here */}
                     </button>
                     <img
