@@ -5,7 +5,9 @@ import {
     ToolbarButton,
 } from "@wordpress/components";
 import { BlockControls, useBlockProps } from "@wordpress/block-editor";
+import PlayIcon from "./playIcon";
 import "./editor.scss";
+
 
 const Edit = ({ attributes, setAttributes }) => {
     const { url } = attributes;
@@ -66,6 +68,7 @@ const Edit = ({ attributes, setAttributes }) => {
                 ) : (
                     youtubeId && (
                         <div className="youtube-preview">
+                            <PlayIcon />
                             <img
                                 src={placeholderImageUrl}
                                 alt="YouTube Video Placeholder"
