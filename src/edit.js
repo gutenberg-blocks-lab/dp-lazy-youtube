@@ -6,7 +6,7 @@ import {
 } from "@wordpress/components";
 import { BlockControls, useBlockProps } from "@wordpress/block-editor";
 import { extractYoutubeId, getPlaceholderImageUrl } from "./youtubeHelpers";
-import PlayIcon from "./playIcon";
+import PlayContent from "./playContent";
 import "./editor.scss";
 
 const Edit = ({ attributes, setAttributes }) => {
@@ -32,8 +32,7 @@ const Edit = ({ attributes, setAttributes }) => {
 
     const renderPreview = () => (
         <div className="youtube-preview">
-            <PlayIcon />
-            <img src={placeholderImageUrl} alt="YouTube Video Placeholder" />
+            <PlayContent url={url} />
         </div>
     );
 

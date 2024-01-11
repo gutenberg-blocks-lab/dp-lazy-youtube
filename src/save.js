@@ -1,5 +1,5 @@
 import { extractYoutubeId, getPlaceholderImageUrl } from "./youtubeHelpers";
-import PlayIcon from "./playIcon";
+import PlayContent from "./playContent";
 
 const Save = ({ attributes }) => {
     const { url, containerId } = attributes;
@@ -8,18 +8,7 @@ const Save = ({ attributes }) => {
 
     return (
         <div id={containerId} className="lazy-youtube-player-container">
-            {youtubeId && (
-                <>
-                    <button className="play-button" data-youtube-id={youtubeId}>
-                        <PlayIcon />
-                    </button>
-                    <img
-                        src={placeholderImageUrl}
-                        alt="YouTube Video Placeholder"
-                        className="youtube-placeholder-image"
-                    />
-                </>
-            )}
+            {youtubeId && <PlayContent url={url} />}
         </div>
     );
 };
