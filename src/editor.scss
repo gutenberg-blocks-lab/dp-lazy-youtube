@@ -21,15 +21,17 @@
 	.youtube-preview {
 		display: flex;
 		position: relative;
-		
-		
+		width: 100%;		
+
 		img {
-			max-width: 100%;
+			width: 100%;
 			margin: 0;
 		}
 
 		.play-button{
 			background-color: transparent;
+			border: 0;
+			outline: 0;
 			@include absolute;
 		}
 
