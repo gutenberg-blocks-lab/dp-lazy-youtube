@@ -1,18 +1,18 @@
 const Save = ({ attributes }) => {
-    const { url, containerId } = attributes;
+const { url, containerId } = attributes;
 
-    const extractYoutubeId = (url) => {
-        if (!url) return "";
-        const regex =
-            /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^\"&?\/ ]{11})/;
-        const matches = url.match(regex);
-        return matches ? matches[1] : "";
-    };
+const extractYoutubeId = (url) => {
+    if (!url) return "";
+    const regex =
+        /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^\"&?\/ ]{11})/;
+    const matches = url.match(regex);
+    return matches ? matches[1] : "";
+};
 
-    const youtubeId = extractYoutubeId(url);
-    const placeholderImageUrl = youtubeId
-        ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`
-        : "";
+const youtubeId = extractYoutubeId(url);
+const placeholderImageUrl = youtubeId
+    ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`
+    : "";
 
     return (
         <div

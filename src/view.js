@@ -27,7 +27,3 @@ function loadYouTubeVideo(youtubeId, containerId) {
         console.error("Container not found for ID:", containerId);
     }
 }
-
-/* eslint-disable no-console */
-console.log("Hello World! (from create-block-dp-lazy-youtube block)");
-/* eslint-enable no-console */

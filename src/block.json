@@ -3,13 +3,17 @@
 	"apiVersion": 3,
 	"name": "create-block/dp-lazy-youtube",
 	"version": "0.1.0",
-	"title": "Dp Lazy Youtube",
+	"title": "Youtube LazyLoad",
 	"category": "widgets",
-	"icon": "smiley",
-	"description": "Example block scaffolded with Create Block tool.",
+	"icon": "video-alt3",
+	"description": "Block that load YouTube scripts only if user clicks on the play button",
 	"example": {},
 	"supports": {
-		"html": false
+		"html": false,
+		"align": [
+			"wide",
+			"full"
+		]
 	},
 	"attributes": {
 		"url": {
@@ -20,7 +24,7 @@
 			"type": "string"
 		}
 	},
-	"textdomain": "dp-init",
+	"textdomain": "dp-lazy-youtube",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
