@@ -1,5 +1,3 @@
-// Edit.js
-
 import { useState, useEffect } from "@wordpress/element";
 import {
     TextControl,
@@ -10,19 +8,32 @@ import { BlockControls, useBlockProps } from "@wordpress/block-editor";
 
 const Edit = ({ attributes, setAttributes }) => {
     const { url } = attributes;
+    let { containerId } = attributes; // Add this line
     const [youtubeId, setYoutubeId] = useState("");
     const [isEditing, setIsEditing] = useState(false);
 
-    const extractYoutubeId = (url) => {
-        const regex =
-            /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^\"&?\/ ]{11})/;
-        const matches = url.match(regex);
-        return matches ? matches[1] : "";
-    };
-
     useEffect(() => {
+        if (!containerId) {
+            containerId = `youtube-container-${Math.floor(
+                Math.random() * 1000000
+            )}`;
+            setAttributes({ containerId }); // Ensure containerId is set
+        }
         setYoutubeId(extractYoutubeId(url));
-    }, [url]);
+    }, [url, containerId, setAttributes]); // Add containerId dependency
+
+   const extractYoutubeId = (url) => {
+       if (!url) return "";
+
+       // Regular expression for extracting the video ID from YouTube URLs
+       const regex =
+           /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^\"&?\/\s]{11})/;
+
+       const matches = url.match(regex);
+       return matches ? matches[1] : "";
+   };
+
+
 
     const handleUrlChange = (newUrl) => {
         setAttributes({ url: newUrl });
