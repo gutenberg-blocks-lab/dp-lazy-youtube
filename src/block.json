@@ -1,9 +1,9 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 2,
-	"name": "create-block/dp-lazy-youtube",
+	"apiVersion": 3,
+	"name": "create-block/dp-init",
 	"version": "0.1.0",
-	"title": "Dp Lazy Youtube",
+	"title": "Dp Init",
 	"category": "widgets",
 	"icon": "smiley",
 	"description": "Example block scaffolded with Create Block tool.",
@@ -11,15 +11,9 @@
 	"supports": {
 		"html": false
 	},
-	"textdomain": "dp-lazy-youtube",
+	"textdomain": "dp-init",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
-	"viewScript": "file:./view.js",
-	"attributes": {
-		"url": {
-			"type": "string",
-			"__experimentalRole": "content"
-		}
-	}
+	"viewScript": "file:./view.js"
 }
