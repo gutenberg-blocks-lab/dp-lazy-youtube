@@ -68,7 +68,7 @@ const Edit = ({ attributes, setAttributes }) => {
                         />
                     </div>
                 ) : (
-                    <div className="empty-block-message">Edit video block</div>
+                    <div className="empty-block-message">Video block is empty</div>
                 )}
             </div>
         </>
