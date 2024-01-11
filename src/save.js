@@ -1,26 +1,13 @@
+import { extractYoutubeId, getPlaceholderImageUrl } from "./youtubeHelpers";
 import PlayIcon from "./playIcon";
 
 const Save = ({ attributes }) => {
     const { url, containerId } = attributes;
-
-    const extractYoutubeId = (url) => {
-        if (!url) return "";
-        const regex =
-            /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^\"&?\/ ]{11})/;
-        const matches = url.match(regex);
-        return matches ? matches[1] : "";
-    };
-
     const youtubeId = extractYoutubeId(url);
-    const placeholderImageUrl = youtubeId
-        ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`
-        : "";
+    const placeholderImageUrl = getPlaceholderImageUrl(youtubeId);
 
     return (
-        <div
-            id={containerId} // This should reflect the containerId attribute
-            className="lazy-youtube-player-container"
-        >
+        <div id={containerId} className="lazy-youtube-player-container">
             {youtubeId && (
                 <>
                     <button className="play-button" data-youtube-id={youtubeId}>

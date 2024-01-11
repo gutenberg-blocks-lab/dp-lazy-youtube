@@ -5,40 +5,37 @@ import {
     ToolbarButton,
 } from "@wordpress/components";
 import { BlockControls, useBlockProps } from "@wordpress/block-editor";
-import "./editor.scss";
+import { extractYoutubeId, getPlaceholderImageUrl } from "./youtubeHelpers";
 import PlayIcon from "./playIcon";
+import "./editor.scss";
 
 const Edit = ({ attributes, setAttributes }) => {
     const { url } = attributes;
     let { containerId } = attributes;
-    const [youtubeId, setYoutubeId] = useState("");
     const [isEditing, setIsEditing] = useState(!url);
 
     useEffect(() => {
         if (!containerId) {
-            containerId = `youtube-container-${Math.floor(
+            const newContainerId = `youtube-container-${Math.floor(
                 Math.random() * 1000000
             )}`;
-            setAttributes({ containerId });
+            setAttributes({ containerId: newContainerId });
         }
-        setYoutubeId(extractYoutubeId(url));
-    }, [url, containerId, setAttributes]);
-
-    const extractYoutubeId = (url) => {
-        if (!url) return "";
-        const regex =
-            /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^\"&?\/\s]{11})/;
-        const matches = url.match(regex);
-        return matches ? matches[1] : "";
-    };
+    }, [url, containerId]);
 
     const handleUrlChange = (newUrl) => {
         setAttributes({ url: newUrl });
     };
 
-    const placeholderImageUrl = youtubeId
-        ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`
-        : "";
+    const youtubeId = extractYoutubeId(url);
+    const placeholderImageUrl = getPlaceholderImageUrl(youtubeId);
+
+    const renderPreview = () => (
+        <div className="youtube-preview">
+            <PlayIcon />
+            <img src={placeholderImageUrl} alt="YouTube Video Placeholder" />
+        </div>
+    );
 
     return (
         <>
@@ -47,7 +44,7 @@ const Edit = ({ attributes, setAttributes }) => {
                     <ToolbarButton
                         icon={isEditing ? "edit" : "visibility"}
                         label={isEditing ? "Edit URL" : "View Image"}
-                        onClick={() => setIsEditing(!isEditing)}
+                        onClick={() => setIsEditing((current) => !current)}
                     />
                 </ToolbarGroup>
             </BlockControls>
@@ -60,15 +57,11 @@ const Edit = ({ attributes, setAttributes }) => {
                         placeholder="Enter YouTube URL"
                     />
                 ) : youtubeId ? (
-                    <div className="youtube-preview">
-                        <PlayIcon />
-                        <img
-                            src={placeholderImageUrl}
-                            alt="YouTube Video Placeholder"
-                        />
-                    </div>
+                    renderPreview()
                 ) : (
-                    <div className="empty-block-message">Video block is empty</div>
+                    <div className="empty-block-message">
+                        Video block is empty
+                    </div>
                 )}
             </div>
         </>
