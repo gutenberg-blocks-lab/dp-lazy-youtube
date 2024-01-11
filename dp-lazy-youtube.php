@@ -5,7 +5,7 @@
  * Description:       Block that load YouTube video scripts only if user clicks on the play button"
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Version:           1.0.2
+ * Version:           1.0.0
  * Author:            Marko Krstić
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function dp_lazy_youtube_dp_lazy_youtube_block_init() {
+function dp_block_lazy_youtube() {
 	register_block_type( __DIR__ . '/build' );
 }
-add_action( 'init', 'dp_lazy_youtube_dp_lazy_youtube_block_init' );
+add_action( 'init', 'dp_block_lazy_youtube' );
