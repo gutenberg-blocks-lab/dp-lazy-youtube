@@ -13,7 +13,7 @@ button{
         width: 100%;
         display: flex;
         justify-content: center;
-        z-index: 1;
+        z-index: 10;
         background: transparent;
         border: 0;
         height: 100%;
@@ -21,6 +21,8 @@ button{
     }
 
 	.play-icon-wrap{
+        position: relative;
+        z-index: 9;
 		color: white;
 		background: #00000091;
 		display: flex;

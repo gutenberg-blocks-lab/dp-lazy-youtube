@@ -1,5 +1,6 @@
 .wp-block-create-block-dp-lazy-youtube {
     display: flex;
+	box-sizing: border-box;
 
 	&:empty{
 		border: 3px solid#3858e9;	

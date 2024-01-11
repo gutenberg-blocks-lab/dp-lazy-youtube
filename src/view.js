@@ -1,13 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
     document.body.addEventListener("click", function (event) {
-        if (
-            event.target &&
-            event.target.matches(".lazy-youtube-player-container .play-button")
-        ) {
-            const button = event.target;
-            const youtubeId = button.getAttribute("data-youtube-id");
-            const containerId = button.parentElement.id;
-            loadYouTubeVideo(youtubeId, containerId);
+        let targetElement = event.target;
+
+        // Loop through the DOM tree to find if the clicked element is a play button or a child of it
+        while (targetElement != null) {
+            if (
+                targetElement.matches(
+                    ".lazy-youtube-player-container .play-button"
+                )
+            ) {
+                const youtubeId = targetElement.getAttribute("data-youtube-id");
+                const containerId = targetElement.parentElement.id;
+                loadYouTubeVideo(youtubeId, containerId);
+                return; // Stop the loop and exit the function
+            }
+            targetElement = targetElement.parentElement;
         }
     });
 });

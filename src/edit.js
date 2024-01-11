@@ -5,6 +5,8 @@ import {
     ToolbarButton,
 } from "@wordpress/components";
 import { BlockControls, useBlockProps } from "@wordpress/block-editor";
+import "./editor.scss";
+import PlayIcon from "./playIcon";
 
 const Edit = ({ attributes, setAttributes }) => {
     const { url } = attributes;
@@ -22,18 +24,16 @@ const Edit = ({ attributes, setAttributes }) => {
         setYoutubeId(extractYoutubeId(url));
     }, [url, containerId, setAttributes]); // Add containerId dependency
 
-   const extractYoutubeId = (url) => {
-       if (!url) return "";
+    const extractYoutubeId = (url) => {
+        if (!url) return "";
 
-       // Regular expression for extracting the video ID from YouTube URLs
-       const regex =
-           /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^\"&?\/\s]{11})/;
+        // Regular expression for extracting the video ID from YouTube URLs
+        const regex =
+            /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^\"&?\/\s]{11})/;
 
-       const matches = url.match(regex);
-       return matches ? matches[1] : "";
-   };
-
-
+        const matches = url.match(regex);
+        return matches ? matches[1] : "";
+    };
 
     const handleUrlChange = (newUrl) => {
         setAttributes({ url: newUrl });
@@ -65,6 +65,7 @@ const Edit = ({ attributes, setAttributes }) => {
                 ) : (
                     youtubeId && (
                         <div className="youtube-preview">
+                            <PlayIcon />
                             <img
                                 src={placeholderImageUrl}
                                 alt="YouTube Video Placeholder"
