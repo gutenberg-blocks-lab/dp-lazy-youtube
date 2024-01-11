@@ -1,6 +1,6 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
+	"apiVersion": 2,
 	"name": "create-block/dp-lazy-youtube",
 	"version": "0.1.0",
 	"title": "Dp Lazy Youtube",
@@ -15,5 +15,11 @@
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
-	"viewScript": "file:./view.js"
+	"viewScript": "file:./view.js",
+	"attributes": {
+		"url": {
+			"type": "string",
+			"__experimentalRole": "content"
+		}
+	}
 }

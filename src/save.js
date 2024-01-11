@@ -1,24 +1,16 @@
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
-import { useBlockProps } from '@wordpress/block-editor';
+// Save.js
 
-/**
- * The save function defines the way in which the different attributes should
- * be combined into the final markup, which is then serialized by the block
- * editor into `post_content`.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#save
- *
- * @return {Element} Element to render.
- */
-export default function save() {
-	return (
-		<p { ...useBlockProps.save() }>
-			{ 'Dp Lazy Youtube – hello from the saved content!' }
-		</p>
-	);
+import { useBlockProps } from "@wordpress/block-editor";
+
+export default function save({ attributes }) {
+    const { url } = attributes;
+
+    // We'll save the URL as a data attribute, which PHP will use for server-side rendering
+    return (
+        <div {...useBlockProps.save()}>
+            <div className="youtube-video-placeholder" data-youtube-url={url}>
+                {/* Display a placeholder or an empty div, as actual rendering will be done by PHP */}
+            </div>
+        </div>
+    );
 }
