@@ -1,16 +1,42 @@
-// Save.js
-
-import { useBlockProps } from "@wordpress/block-editor";
-
-export default function save({ attributes }) {
+const Save = ({ attributes }) => {
     const { url } = attributes;
 
-    // We'll save the URL as a data attribute, which PHP will use for server-side rendering
+    const extractYoutubeId = (url) => {
+        const regex =
+            /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^\"&?\/ ]{11})/;
+        const matches = url.match(regex);
+        return matches ? matches[1] : "";
+    };
+
+    const youtubeId = extractYoutubeId(url);
+    const placeholderImageUrl = youtubeId
+        ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`
+        : "";
+    const random_number = Math.floor(100000 + Math.random() * 900000);
+
     return (
-        <div {...useBlockProps.save()}>
-            <div className="youtube-video-placeholder" data-youtube-url={url}>
-                {/* Display a placeholder or an empty div, as actual rendering will be done by PHP */}
-            </div>
+        <div
+            id={`youtube-player-container-${random_number}`}
+            className="lazy-youtube-player-container"
+        >
+            {youtubeId && (
+                <>
+                    <button
+                        className="play-button"
+                        id={`play-button-${random_number}`}
+                        data-youtube-id={youtubeId}
+                    >
+                        {/* Put your play button SVG or icon here */}
+                    </button>
+                    <img
+                        src={placeholderImageUrl}
+                        alt="YouTube Video Placeholder"
+                        className="youtube-placeholder-image"
+                    />
+                </>
+            )}
         </div>
     );
-}
+};
+
+export default Save;
