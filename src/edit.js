@@ -10,27 +10,26 @@ import PlayIcon from "./playIcon";
 
 const Edit = ({ attributes, setAttributes }) => {
     const { url } = attributes;
-    let { containerId } = attributes; // Add this line
+    let { containerId } = attributes;
     const [youtubeId, setYoutubeId] = useState("");
-    const [isEditing, setIsEditing] = useState(false);
+
+    // Set isEditing to true if url is empty
+    const [isEditing, setIsEditing] = useState(!url);
 
     useEffect(() => {
         if (!containerId) {
             containerId = `youtube-container-${Math.floor(
                 Math.random() * 1000000
             )}`;
-            setAttributes({ containerId }); // Ensure containerId is set
+            setAttributes({ containerId });
         }
         setYoutubeId(extractYoutubeId(url));
-    }, [url, containerId, setAttributes]); // Add containerId dependency
+    }, [url, containerId, setAttributes]);
 
     const extractYoutubeId = (url) => {
         if (!url) return "";
-
-        // Regular expression for extracting the video ID from YouTube URLs
         const regex =
             /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^\"&?\/\s]{11})/;
-
         const matches = url.match(regex);
         return matches ? matches[1] : "";
     };
