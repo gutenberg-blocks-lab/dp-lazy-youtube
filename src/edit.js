@@ -5,19 +5,10 @@ import { TextControl } from "@wordpress/components";
 import { useBlockProps } from "@wordpress/block-editor";
 
 const Edit = ({ attributes, setAttributes }) => {
-    const { url, containerId } = attributes;
+    const { url } = attributes;
     const [youtubeId, setYoutubeId] = useState("");
 
-    useEffect(() => {
-        if (!containerId) {
-            const uniqueId = `youtube-container-${Math.floor(
-                100000 + Math.random() * 900000
-            )}`;
-            setAttributes({ containerId: uniqueId });
-        }
-    }, [containerId, setAttributes]);
-
-
+    // Function to extract YouTube ID from the URL
     const extractYoutubeId = (url) => {
         const regex =
             /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^\"&?\/ ]{11})/;
@@ -25,11 +16,17 @@ const Edit = ({ attributes, setAttributes }) => {
         return matches ? matches[1] : "";
     };
 
-    const handleUrlChange = (url) => {
-        setAttributes({ url });
+    // Effect to update the YouTube ID when the URL changes
+    useEffect(() => {
         setYoutubeId(extractYoutubeId(url));
+    }, [url]);
+
+    // Function to handle URL input changes
+    const handleUrlChange = (newUrl) => {
+        setAttributes({ url: newUrl });
     };
 
+    // URL for the YouTube thumbnail image
     const placeholderImageUrl = youtubeId
         ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`
         : "";
