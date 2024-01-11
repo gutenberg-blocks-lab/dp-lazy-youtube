@@ -1,9 +1,28 @@
-/**
- * The following styles get applied inside the editor only.
- *
- * Replace them with your own styles or remove the file completely.
- */
+.wp-block-create-block-dp-lazy-youtube {
+    display: flex;
+	
+	.youtube-preview {
+		display: flex;
+		
+		img {
+			max-width: 100%;
+			margin: 0;
+		}
+	}
 
-.wp-block-create-block-dp-init {
-	border: 1px dotted #f00;
-}
+
+	.components-base-control{
+		width: 100%;
+		border: 3px solid#3858e9;	
+		background-color: rgba(56, 88, 233, 0.05);	
+		height: auto;
+		padding: 4rem 20px;
+		display: flex;
+		align-items: center;
+
+		> div{
+			flex-grow: 1;
+		}
+	}
+
+}	

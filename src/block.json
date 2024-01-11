@@ -5,7 +5,7 @@
 	"version": "0.1.0",
 	"title": "Dp Lazy Youtube",
 	"category": "widgets",
-	"icon": "smiley",
+	"icon": "video-alt3",
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
 	"supports": {
