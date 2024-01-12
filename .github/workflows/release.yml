@@ -17,7 +17,7 @@ jobs:
       - name: "Setup NodeJS."
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '16'  # Updated Node.js version
 
       - name: "Install NPM dependencies."
         run: npm install
@@ -27,7 +27,11 @@ jobs:
 
       - name: "Remove files based on .distignore"
         run: |
-          cat .distignore | xargs rm -rf
+          if [ -f .distignore ]; then
+            cat .distignore | xargs rm -rf
+          else
+            echo ".distignore file not found."
+          fi
 
       - name: "Create a Release Archive"
         run: |
@@ -38,4 +42,4 @@ jobs:
         with:
           files: release.zip
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Ensure this token has the right permissions
