@@ -1,7 +1,7 @@
 {
-	"name": "dp-init",
+	"name": "dp-lazy-youtube",
 	"version": "0.1.0",
-	"description": "Example block scaffolded with Create Block tool.",
+	"description": "Block that load YouTube video scripts only if user clicks on the play button",
 	"author": "The WordPress Contributors",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
