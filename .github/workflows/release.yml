@@ -17,12 +17,12 @@ jobs:
       - name: "Setup NodeJS."
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Updated Node.js version
+          node-version: '20'  # Updated Node.js version
 
       - name: "Install NPM dependencies."
         run: npm install
 
-      - name: "Build release: Stable"
+      - name: "Build release"
         run: npm run build
 
       - name: "Remove files based on .distignore"
@@ -33,13 +33,16 @@ jobs:
             echo ".distignore file not found."
           fi
 
+      - name: "Determine package name"
+        id: package-name
+        run: echo "::set-output name=PACKAGE_NAME::$(node -p -e "require('./package.json').name")"
+
       - name: "Create a Release Archive"
-        run: |
-          zip -r release.zip .
+        run: zip -r ${{ steps.package-name.outputs.PACKAGE_NAME }}.zip .
 
       - name: "Create a GitHub Release"
         uses: softprops/action-gh-release@v1
         with:
-          files: release.zip
+          files: ${{ steps.package-name.outputs.PACKAGE_NAME }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.WPSCIPTSTOKEN }}  # Ensure this token has the right permissions
