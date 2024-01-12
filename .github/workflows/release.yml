@@ -42,4 +42,4 @@ jobs:
         with:
           files: release.zip
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Ensure this token has the right permissions
+          GITHUB_TOKEN: ${{ secrets.WPSCIPTSTOKEN }}  # Ensure this token has the right permissions
