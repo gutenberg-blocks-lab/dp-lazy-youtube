@@ -38,11 +38,11 @@ jobs:
         run: echo "::set-output name=PACKAGE_NAME::$(node -p -e "require('./package.json').name")"
 
       - name: "Create a Release Archive"
-        run: zip -r ${{ steps.package-name.outputs.PACKAGE_NAME }}.zip .
+        zip -r dp-lazy-youtube.zip . # replace zip name
 
       - name: "Create a GitHub Release"
         uses: softprops/action-gh-release@v1
         with:
-          files: ${{ steps.package-name.outputs.PACKAGE_NAME }}.zip
+          files: dp-lazy-youtube.zip # replace zip name
         env:
           GITHUB_TOKEN: ${{ secrets.WPSCIPTSTOKEN }}  # Ensure this token has the right permissions
