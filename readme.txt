@@ -10,20 +10,25 @@ Example block scaffolded with Create Block tool.
 
 == Description ==
 
-This is the long description. No limit, and you can use Markdown (as well as in the following sections).
+Block that load YouTube video scripts only if user clicks on the play button. 
+When you paste the link it will automatically fetch youtube thumb max size. ( I may add option to choose smaller ones as well).
+On the front end once user hit play  it will start loading youtube scripts.
+But the awesome thing is you can click on youtube code embed and convert it to this with one click.
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+== Installation Quick ==
+
+    1. Navigate to the Releases in the right sidebar.
+    2. Download dp-lazy-load.zip
+    3. Upload the plugin folder to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
+    4. Activate the plugin through the 'Plugins' screen in WordPress
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-1. Upload the plugin files to the `/wp-content/plugins/dp-init` directory, or install the plugin through the WordPress plugins screen directly.
-1. Activate the plugin through the 'Plugins' screen in WordPress
-
+    1. Download files
+    2. Run NPM Install
+    3. Run NPM Build to create build folder
+    3. Upload the plugin folder to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
+    4. Activate the plugin through the 'Plugins' screen in WordPress
 
 == Frequently Asked Questions ==
 
