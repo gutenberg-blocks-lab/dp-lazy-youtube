@@ -21,13 +21,16 @@ jobs:
     - name: Install NPM Packages
       run: npm install
 
-    - name: Build
+    - name: Build Project
       run: npm run build
 
-    # Add your build steps here
+    - name: Cleanup Unnecessary Files
+      run: |
+        rm -rf src/
+        rm -rf node_modules/
 
-    - name: Zip Artifacts
-      run: zip -r release.zip <path-to-your-artifacts>
+    - name: Zip Release
+      run: zip -r release.zip .
 
     - name: Create Release
       id: create_release
