@@ -1,13 +1,12 @@
 name: Release Workflow
 
-# This workflow is triggered on pushes with tags prefixed with 'v'
 on:
   push:
     tags:
       - 'v*'
 
 jobs:
-  build:
+  build-and-release:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,9 +14,9 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Set up Node.js
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v2
       with:
-        node-version: '14' # Specify your Node.js version here
+        node-version: '16'
 
     - name: Install NPM Packages
       run: npm install
@@ -25,8 +24,28 @@ jobs:
     - name: Build
       run: npm run build
 
-    - name: Remove files and folders based on .distignore
-      run: |
-        cat .distignore | xargs rm -rf
+    # Add your build steps here
 
-    # Add additional steps here if you need to deploy or archive the build artifacts
+    - name: Zip Artifacts
+      run: zip -r release.zip <path-to-your-artifacts>
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./release.zip
+        asset_name: release.zip
+        asset_content_type: application/zip
