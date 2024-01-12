@@ -5,7 +5,7 @@
  * Description:       Block that load YouTube video scripts only if user clicks on the play button"
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Version:           1.0.3
+ * Version:           1.0.4
  * Author:            Marko Krstić
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
