@@ -1,4 +1,4 @@
-=== Dp Init ===
+=== DP YouTube LazyLoad ===
 Contributors:      The WordPress Contributors
 Tags:              block
 Tested up to:      6.1
@@ -14,6 +14,9 @@ Block that load YouTube video scripts only if user clicks on the play button.
 When you paste the link it will automatically fetch youtube thumb max size. ( I may add option to choose smaller ones as well).
 On the front end once user hit play  it will start loading youtube scripts.
 But the awesome thing is you can click on youtube code embed and convert it to this with one click.
+
+![DP Lazy Load Screenshot](screenshots/dp-lazy-load.png)
+
 
 == Installation Quick ==
 
