@@ -1,0 +1,32 @@
+name: Release Workflow
+
+# This workflow is triggered on pushes with tags prefixed with 'v'
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14' # Specify your Node.js version here
+
+    - name: Install NPM Packages
+      run: npm install
+
+    - name: Build
+      run: npm run build
+
+    - name: Remove files and folders based on .distignore
+      run: |
+        cat .distignore | xargs rm -rf
+
+    # Add additional steps here if you need to deploy or archive the build artifacts
