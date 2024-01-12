@@ -3,39 +3,67 @@ name: Build and Release
 on:
   push:
     tags:
-      - 'v*'
+      - '[0-9]+.[0-9]+.[0-9]+*'
 
 jobs:
-  build-and-release:
+  dist:
+    name: "Build distribution release."
     runs-on: ubuntu-latest
-
+    env:
+      release: stable
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
+      - name: "Checks out the repository."
+        uses: "actions/checkout@v2"
 
-      - name: Setup Node.js
+      - name: "Setup NodeJS."
         uses: actions/setup-node@v2
         with:
-          node-version: '14' # Specify the Node.js version you want
+          node-version: '14'
 
-      - name: Install NPM packages
+      - name: "Get NPM cache directory."
+        id: npm-cache-dir
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+
+      - name: "Sets up NPM Caching."
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.npm-cache-dir.outputs.dir }}
+          key: ${{ runner.os }}-node-npm-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-npm-build-
+
+      - name: "Install NPM dependencies."
         run: npm install
 
-      - name: Build
-        run: npm run build # This runs the "wp-scripts build" command
+      - name: "Get release version."
+        run: |
+          echo "release_tag=$(node -p -e "require('./package.json').version")" >> $GITHUB_ENV
 
-      - name: Remove files and folders based on .distignore
-        run: cat .distignore | xargs rm -rf
+      - name: "Get release file base name."
+        run: |
+          echo "release_name=$(node -p -e "require('./package.json').name")" >> $GITHUB_ENV
 
-      - name: Create Release
-        uses: actions/create-release@v1
+      - name: "Logs debug information."
+        run: |
+          node --version
+          npm --version
+          echo ${{ env.release_tag }}
+          echo ${{ env.release_status }}
+
+      - name: "Build release: Pre-release"
+        if: ${{ env.release_status == 'pre-release' }}
+        run: |
+          npm run prerelease
+
+      - name: "Build release: Stable"
+        if: ${{ env.release_status != 'pre-release' }}
+        run: |
+          npm run release
+
+      - name: "Add package to GitHub releases."
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./deploy/${{ env.release_tag }}/${{ env.release_name }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
-          body: "Description of the release"
-          # Attach files to the release if needed
-          # You can use actions/upload-release-asset for this purpose
