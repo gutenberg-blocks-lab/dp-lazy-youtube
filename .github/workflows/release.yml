@@ -1,4 +1,4 @@
-name: Release Workflow
+name: Build and Release
 
 on:
   push:
@@ -10,45 +10,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14' # Specify the Node.js version you want
 
-    - name: Install NPM Packages
-      run: npm install
+      - name: Install NPM packages
+        run: npm install
 
-    - name: Build Project
-      run: npm run build
+      - name: Build
+        run: npm run build # This runs the "wp-scripts build" command
 
-    - name: Cleanup Unnecessary Files
-      run: |
-        rm -rf src/
-        rm -rf node_modules/
+      - name: Remove files and folders based on .distignore
+        run: cat .distignore | xargs rm -rf
 
-    - name: Zip Release
-      run: zip -r release.zip .
-
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
-        prerelease: false
-
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./release.zip
-        asset_name: release.zip
-        asset_content_type: application/zip
+      - name: Create Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+          body: "Description of the release"
+          # Attach files to the release if needed
+          # You can use actions/upload-release-asset for this purpose
