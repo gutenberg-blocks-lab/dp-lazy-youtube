@@ -51,15 +51,10 @@ jobs:
           echo ${{ env.release_tag }}
           echo ${{ env.release_status }}
 
-      - name: "Build release: Pre-release"
-        if: ${{ env.release_status == 'pre-release' }}
-        run: |
-          npm run prerelease
-
       - name: "Build release: Stable"
         if: ${{ env.release_status != 'pre-release' }}
         run: |
-          npm run release
+          npm run build
 
       - name: "Add package to GitHub releases."
         uses: softprops/action-gh-release@v1
