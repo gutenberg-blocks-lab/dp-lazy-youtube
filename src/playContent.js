@@ -1,9 +1,9 @@
 import React from "react";
 import { extractYoutubeId, getPlaceholderImageUrl } from "./youtubeHelpers";
 
-const PlayContent = ({ url }) => {
+const PlayContent = ({ url, quality = 'maxresdefault' }) => {
     const youtubeId = extractYoutubeId(url);
-    const placeholderImageUrl = getPlaceholderImageUrl(youtubeId);
+    const placeholderImageUrl = getPlaceholderImageUrl(youtubeId, quality);
 
     return (
         <>
@@ -35,5 +35,3 @@ const PlayContent = ({ url }) => {
 };
 
 export default PlayContent;
-
-

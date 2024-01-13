@@ -5,6 +5,7 @@ import {
     TextControl,
     ToolbarGroup,
     ToolbarButton,
+    SelectControl
 } from "@wordpress/components";
 import { BlockControls, useBlockProps } from "@wordpress/block-editor";
 import { extractYoutubeId, getPlaceholderImageUrl } from "./youtubeHelpers";
@@ -12,7 +13,7 @@ import PlayContent from "./playContent";
 import "./editor.scss";
 
 const Edit = ({ attributes, setAttributes }) => {
-    const { url } = attributes;
+    const { url, quality } = attributes;
     let { containerId } = attributes;
     const [isEditing, setIsEditing] = useState(!url);
 
@@ -29,12 +30,15 @@ const Edit = ({ attributes, setAttributes }) => {
         setAttributes({ url: newUrl });
     };
 
+    const handleQualityChange = (newQuality) => {
+        setAttributes({ quality: newQuality });
+    };
+
     const youtubeId = extractYoutubeId(url);
-    const placeholderImageUrl = getPlaceholderImageUrl(youtubeId);
 
     const renderPreview = () => (
         <div className="youtube-preview">
-            <PlayContent url={url} />
+            <PlayContent url={url} quality={quality} />
         </div>
     );
 
@@ -48,6 +52,21 @@ const Edit = ({ attributes, setAttributes }) => {
                 />
             </ToolbarGroup>
         </BlockControls>
+    );
+
+    const renderQualitySelector = () => (
+        <SelectControl
+            label="Image Quality"
+            value={quality || 'maxresdefault'}
+            options={[
+                { label: 'Max Resolution', value: 'maxresdefault' },
+                { label: 'Standard Definition', value: 'sddefault' },
+                { label: 'Medium Quality', value: 'mqdefault' },
+                { label: 'Height Quality', value: 'hqdefault' },
+                { label: 'Default Quality', value: 'default' }
+            ]}
+            onChange={handleQualityChange}
+        />
     );
 
     return (
@@ -70,6 +89,7 @@ const Edit = ({ attributes, setAttributes }) => {
                             onChange={handleUrlChange}
                             placeholder="Enter YouTube URL"
                         />
+                        {renderQualitySelector()}
                     </div>
                 ) : youtubeId ? (
                     renderPreview()

@@ -7,8 +7,13 @@ export const extractYoutubeId = (url) => {
     return url.match(regex)?.[1] || "";
 };
 
-export const getPlaceholderImageUrl = (youtubeId) => {
-    return youtubeId
-        ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg`
-        : "";
+export const getPlaceholderImageUrl = (youtubeId, quality = 'maxresdefault') => {
+    if (!youtubeId) return "";
+
+    const validQualities = ['maxresdefault', 'sddefault', 'mqdefault', 'hqdefault', 'default'];
+    if (!validQualities.includes(quality)) {
+        quality = 'maxresdefault';
+    }
+
+    return `https://img.youtube.com/vi/${youtubeId}/${quality}.jpg`;
 };
