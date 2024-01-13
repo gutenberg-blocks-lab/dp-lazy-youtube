@@ -1,17 +1,18 @@
 // Edit.js
 
-import { useState, useEffect } from "@wordpress/element";
+import { useState, useEffect } from '@wordpress/element';
 import {
     TextControl,
     ToolbarGroup,
     ToolbarButton,
-    SelectControl
-} from "@wordpress/components";
-import { BlockControls, useBlockProps } from "@wordpress/block-editor";
-import { extractYoutubeId, getPlaceholderImageUrl } from "./youtubeHelpers";
-import PlayContent from "./playContent";
+    SelectControl,
+    PanelBody
+} from '@wordpress/components';
+import { BlockControls, InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import { extractYoutubeId } from './youtubeHelpers';
+import PlayContent from './playContent';
 import { qualityOptions, defaultQuality } from './qualitySettings';
-import "./editor.scss";
+import './editor.scss';
 
 const Edit = ({ attributes, setAttributes }) => {
     const { url, quality } = attributes;
@@ -20,9 +21,7 @@ const Edit = ({ attributes, setAttributes }) => {
 
     useEffect(() => {
         if (!containerId) {
-            const newContainerId = `youtube-container-${Math.floor(
-                Math.random() * 1000000
-            )}`;
+            const newContainerId = `youtube-container-${Math.floor(Math.random() * 1000000)}`;
             setAttributes({ containerId: newContainerId });
         }
     }, [url, containerId]);
@@ -43,48 +42,39 @@ const Edit = ({ attributes, setAttributes }) => {
         </div>
     );
 
-    const renderToolbar = () => (
-        <BlockControls>
-            <ToolbarGroup>
-                <ToolbarButton
-                    icon={isEditing ? "edit" : "visibility"}
-                    label={isEditing ? "Edit URL" : "View Image"}
-                    onClick={() => setIsEditing((current) => !current)}
-                />
-            </ToolbarGroup>
-        </BlockControls>
-    );
-
-    const renderQualitySelector = () => (
-        <SelectControl
-            label="Image Quality"
-            value={quality || defaultQuality}
-            options={qualityOptions}
-            onChange={handleQualityChange}
-        />
-    );
-
     return (
         <>
-            {youtubeId && renderToolbar()}
+            <InspectorControls>
+                <PanelBody title="Settings" initialOpen={true}>
+                    <SelectControl
+                        label="Image Quality"
+                        value={quality || defaultQuality}
+                        options={qualityOptions}
+                        onChange={handleQualityChange}
+                    />
+                </PanelBody>
+            </InspectorControls>
+            <BlockControls>
+                <ToolbarGroup>
+                    <ToolbarButton
+                        icon={isEditing ? "edit" : "visibility"}
+                        label={isEditing ? "Edit URL" : "View Image"}
+                        onClick={() => setIsEditing((current) => !current)}
+                    />
+                </ToolbarGroup>
+            </BlockControls>
             <div {...useBlockProps()}>
                 {isEditing ? (
                     <div className="lazy-load-edit-wrapper">
-                        <div className="lazy-load__title">
-                            YouTube URL
-                        </div>
-
+                        <div className="lazy-load__title">YouTube URL</div>
                         <div className="lazy-load__title__instructions">
-                            Paste a link to the content you want to display on
-                            your site.
+                            Paste a link to the content you want to display on your site.
                         </div>
-
                         <TextControl
                             value={url || ""}
                             onChange={handleUrlChange}
                             placeholder="Enter YouTube URL"
                         />
-                        {renderQualitySelector()}
                     </div>
                 ) : youtubeId ? (
                     renderPreview()

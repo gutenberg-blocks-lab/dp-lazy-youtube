@@ -52,6 +52,15 @@ directory take precedence. For example, `/assets/screenshot-1.png` would win ove
 
 == Changelog ==
 
+= 1.0.3 =
+* Added image guality
+
+= 1.0.2 =
+* Updated UI to look similar to the 
+
+= 1.0.0 =
+* Stable
+
 = 0.1.0 =
 * Release
 
