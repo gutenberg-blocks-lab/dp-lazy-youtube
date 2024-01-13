@@ -10,6 +10,7 @@ import {
 import { BlockControls, useBlockProps } from "@wordpress/block-editor";
 import { extractYoutubeId, getPlaceholderImageUrl } from "./youtubeHelpers";
 import PlayContent from "./playContent";
+import { qualityOptions, defaultQuality } from './qualitySettings';
 import "./editor.scss";
 
 const Edit = ({ attributes, setAttributes }) => {
@@ -57,14 +58,8 @@ const Edit = ({ attributes, setAttributes }) => {
     const renderQualitySelector = () => (
         <SelectControl
             label="Image Quality"
-            value={quality || 'maxresdefault'}
-            options={[
-                { label: 'Max Resolution', value: 'maxresdefault' },
-                { label: 'Standard Definition', value: 'sddefault' },
-                { label: 'Medium Quality', value: 'mqdefault' },
-                { label: 'Height Quality', value: 'hqdefault' },
-                { label: 'Default Quality', value: 'default' }
-            ]}
+            value={quality || defaultQuality}
+            options={qualityOptions}
             onChange={handleQualityChange}
         />
     );
