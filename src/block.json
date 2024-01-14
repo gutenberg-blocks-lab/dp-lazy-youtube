@@ -25,7 +25,7 @@
         },
         "quality": {
             "type": "string",
-            "default": "sddefault"
+            "default": "maxresdefault"
         }
     },
     "textdomain": "dp-lazy-youtube",

@@ -8,4 +8,4 @@ export const qualityOptions = [
     { label: 'Default Quality', value: 'default' }
 ];
 
-export const defaultQuality = 'sddefault';
+export const defaultQuality = "maxresdefault";
