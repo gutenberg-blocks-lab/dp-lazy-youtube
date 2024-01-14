@@ -15,7 +15,28 @@ When you paste the link it will automatically fetch youtube thumb max size. ( I 
 On the front end once user hit play  it will start loading youtube scripts.
 But the awesome thing is you can click on youtube code embed and convert it to this with one click.
 
-![dp-lazy-load](https://github.com/gutenberg-blocks-lab/dp-lazy-youtube/assets/1234350/6dca0ee0-a7a6-4c2a-b150-0dbd9b7a3449)
+## Preview
+<img width="755" alt="preview" src="https://github.com/gutenberg-blocks-lab/dp-lazy-youtube/assets/1234350/287858ef-58e0-4fc8-98c5-3dfe19e481a5">
+
+
+## Edit
+<img width="734" alt="edit" src="https://github.com/gutenberg-blocks-lab/dp-lazy-youtube/assets/1234350/83df7625-f36d-4404-a818-e5029d6b1a95">
+
+
+## Settings
+<img width="279" alt="settings" src="https://github.com/gutenberg-blocks-lab/dp-lazy-youtube/assets/1234350/977ee8d6-f0dc-4b3b-b159-a271204e08d1">
+
+* Max Resolution
+* Standard Definition
+* Medium Quality
+* High Quality
+* Default Quality
+
+## Convert core youtube block to lazyload youtube
+<img width="758" alt="convert" src="https://github.com/gutenberg-blocks-lab/dp-lazy-youtube/assets/1234350/f759ef32-123b-4bd5-a59c-6bc73a333a26">
+
+
+
 
 == Installation Quick ==
 
