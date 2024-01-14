@@ -2,7 +2,7 @@
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
     "name": "create-block/dp-lazy-youtube",
-    "version": "0.1.0",
+    "version": "1.4.0",
     "title": "Youtube LazyLoad",
     "category": "widgets",
     "icon": "video-alt3",
@@ -25,7 +25,7 @@
         },
         "quality": {
             "type": "string",
-            "default": "maxresdefault"
+            "default": "sddefault"
         }
     },
     "textdomain": "dp-lazy-youtube",

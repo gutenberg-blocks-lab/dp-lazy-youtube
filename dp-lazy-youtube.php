@@ -19,17 +19,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-// Include the GitHub updater class
-require_once plugin_dir_path( __FILE__ ) . 'github-updater.php';
-
-// Initialize the GitHub updater
-$github_updater = new My_GitHub_Update_Checker(
-    'dp-lazy-youtube', // Plugin slug
-    '1.0.4', // Current plugin version
-    'https://api.github.com/repos/gutenberg-blocks-lab/dp-lazy-youtube', // GitHub API URL
-    plugin_basename(__FILE__) // Main plugin file
-);
-
 /**
  * Registers the block using the metadata loaded from the `block.json` file.
  * Behind the scenes, it registers also all assets so they can be enqueued
