@@ -36,7 +36,10 @@ But the awesome thing is you can click on youtube code embed and convert it to t
 <img width="758" alt="convert" src="https://github.com/gutenberg-blocks-lab/dp-lazy-youtube/assets/1234350/f759ef32-123b-4bd5-a59c-6bc73a333a26">
 
 
+### Note
 
+If you have problem locating your youtube blocks you can install this plugin to find them:
+https://github.com/krstivoja/YouTube-Block-Search
 
 == Installation Quick ==
 
