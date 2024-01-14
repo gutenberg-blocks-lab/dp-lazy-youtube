@@ -11,6 +11,7 @@
 	box-sizing: border-box;
 	
 	// Preview mode
+	
 	.youtube-preview {
 		display: flex;
 		position: relative;
@@ -20,7 +21,7 @@
 
 		img {
 			width: 100%;
-			object-fit: contain;
+			object-fit: cover;
 			margin: 0;
 		}
 
@@ -41,6 +42,7 @@
 	}
 
 	// Edit mode
+
 	.lazy-load-edit-wrapper{
 		-moz-font-smoothing: subpixel-antialiased;
 		-webkit-font-smoothing: subpixel-antialiased;
